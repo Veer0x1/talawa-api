@@ -31,7 +31,7 @@ describe("resolvers -> Query -> event", () => {
   it(`throws NotFoundError if no event exists with _id === args.id and event.status === 'ACTIVE'`, async () => {
     try {
       const args: QueryEventArgs = {
-        id: Types.ObjectId().toString(),
+        id: new Types.ObjectId().toString(),
       };
 
       await eventResolver?.({}, args, {});

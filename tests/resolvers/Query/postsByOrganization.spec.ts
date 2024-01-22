@@ -66,10 +66,6 @@ describe("resolvers -> Query -> posts", () => {
 
   it(`returns list of all existing posts having post.organization with _id === args.id
   sorted by ascending order of post._id if args.orderBy === 'id_ASC'`, async () => {
-    const sort = {
-      _id: 1,
-    };
-
     const args: QueryPostsByOrganizationArgs = {
       id: testOrganization?.id,
       orderBy: "id_ASC",
@@ -88,7 +84,7 @@ describe("resolvers -> Query -> posts", () => {
     const postsByOrganization = await Post.find({
       organization: testOrganization?._id,
     })
-      .sort(sort)
+      .sort({ _id: "asc" })
       .populate("organization")
       .populate("likedBy")
       .lean();
@@ -102,10 +98,6 @@ describe("resolvers -> Query -> posts", () => {
 
   it(`returns list of all existing posts having post.organization with _id === args.id
   sorted by descending order of post._id if args.orderBy === 'id_DESC'`, async () => {
-    const sort = {
-      _id: -1,
-    };
-
     const args: QueryPostsByOrganizationArgs = {
       id: testOrganization?.id,
       orderBy: "id_DESC",
@@ -124,7 +116,7 @@ describe("resolvers -> Query -> posts", () => {
     const postsByOrganization = await Post.find({
       organization: testOrganization?._id,
     })
-      .sort(sort)
+      .sort({ _id: "desc" })
       .populate("organization")
       .populate("likedBy")
       .lean();
@@ -138,10 +130,6 @@ describe("resolvers -> Query -> posts", () => {
 
   it(`returns list of all existing posts having post.organization with _id === args.id
   sorted by ascending order of post.text if args.orderBy === 'text_ASC'`, async () => {
-    const sort = {
-      text: 1,
-    };
-
     const args: QueryPostsByOrganizationArgs = {
       id: testOrganization?.id,
       orderBy: "text_ASC",
@@ -160,7 +148,7 @@ describe("resolvers -> Query -> posts", () => {
     const postsByOrganization = await Post.find({
       organization: testOrganization?._id,
     })
-      .sort(sort)
+      .sort({ text: "asc" })
       .populate("organization")
       .populate("likedBy")
       .lean();
@@ -174,10 +162,6 @@ describe("resolvers -> Query -> posts", () => {
 
   it(`returns list of all existing posts having post.organization with _id === args.id
   sorted by descending order of post.text if args.orderBy === 'text_DESC'`, async () => {
-    const sort = {
-      text: -1,
-    };
-
     const args: QueryPostsByOrganizationArgs = {
       id: testOrganization?.id,
       orderBy: "text_DESC",
@@ -195,7 +179,7 @@ describe("resolvers -> Query -> posts", () => {
     const postsByOrganization = await Post.find({
       organization: testOrganization?._id,
     })
-      .sort(sort)
+      .sort({ text: "desc" })
       .populate("organization")
       .populate("likedBy")
       .lean();
@@ -210,10 +194,6 @@ describe("resolvers -> Query -> posts", () => {
 
   it(`returns list of all existing posts having post.organization with _id === args.id
   sorted by ascending order of post.title if args.orderBy === 'title_ASC'`, async () => {
-    const sort = {
-      title: 1,
-    };
-
     const args: QueryPostsByOrganizationArgs = {
       id: testOrganization?.id,
       orderBy: "title_ASC",
@@ -231,7 +211,7 @@ describe("resolvers -> Query -> posts", () => {
     const postsByOrganization = await Post.find({
       organization: testOrganization?._id,
     })
-      .sort(sort)
+      .sort({ title: "asc" })
       .populate("organization")
       .populate("likedBy")
       .lean();
@@ -245,10 +225,6 @@ describe("resolvers -> Query -> posts", () => {
 
   it(`returns list of all existing posts having post.organization with _id === args.id
   sorted by descending order of post.title if args.orderBy === 'title_DESC'`, async () => {
-    const sort = {
-      title: -1,
-    };
-
     const args: QueryPostsByOrganizationArgs = {
       id: testOrganization?.id,
       orderBy: "title_DESC",
@@ -267,7 +243,7 @@ describe("resolvers -> Query -> posts", () => {
     const postsByOrganization = await Post.find({
       organization: testOrganization?._id,
     })
-      .sort(sort)
+      .sort({ title: "desc" })
       .populate("organization")
       .populate("likedBy")
       .lean();
@@ -281,10 +257,6 @@ describe("resolvers -> Query -> posts", () => {
 
   it(`returns list of all existing posts having post.organization with _id === args.id
   sorted by ascending order of post.createdAt if args.orderBy === 'createdAt_ASC'`, async () => {
-    const sort = {
-      createdAt: 1,
-    };
-
     const args: QueryPostsByOrganizationArgs = {
       id: testOrganization?.id,
       orderBy: "createdAt_ASC",
@@ -303,7 +275,7 @@ describe("resolvers -> Query -> posts", () => {
     const postsByOrganization = await Post.find({
       organization: testOrganization?._id,
     })
-      .sort(sort)
+      .sort({ createdAt: "asc" })
       .populate("organization")
       .populate("likedBy")
       .lean();
@@ -317,10 +289,6 @@ describe("resolvers -> Query -> posts", () => {
 
   it(`returns list of all existing posts having post.organization with _id === args.id
   sorted by descending order of post.createdAt if args.orderBy === 'createdAt_DESC'`, async () => {
-    const sort = {
-      createdAt: -1,
-    };
-
     const args: QueryPostsByOrganizationArgs = {
       id: testOrganization?.id,
       orderBy: "createdAt_DESC",
@@ -339,7 +307,7 @@ describe("resolvers -> Query -> posts", () => {
     const postsByOrganization = await Post.find({
       organization: testOrganization?._id,
     })
-      .sort(sort)
+      .sort({ createdAt: "desc" })
       .populate("organization")
       .populate("likedBy")
       .lean();
@@ -353,10 +321,6 @@ describe("resolvers -> Query -> posts", () => {
 
   it(`returns list of all existing posts having post.organization with _id === args.id
   sorted by ascending order of post.imageUrl if args.orderBy === 'imageUrl_ASC'`, async () => {
-    const sort = {
-      imageUrl: 1,
-    };
-
     const args: QueryPostsByOrganizationArgs = {
       id: testOrganization?.id,
       orderBy: "imageUrl_ASC",
@@ -375,7 +339,7 @@ describe("resolvers -> Query -> posts", () => {
     const postsByOrganization = await Post.find({
       organization: testOrganization?._id,
     })
-      .sort(sort)
+      .sort({ imageUrl: "asc" })
       .populate("organization")
       .populate("likedBy")
       .lean();
@@ -390,10 +354,6 @@ describe("resolvers -> Query -> posts", () => {
 
   it(`returns list of all existing posts having post.organization with _id === args.id
   sorted by descending order of post.imageUrl if args.orderBy === 'imageUrl_DESC'`, async () => {
-    const sort = {
-      imageUrl: -1,
-    };
-
     const args: QueryPostsByOrganizationArgs = {
       id: testOrganization?.id,
       orderBy: "imageUrl_DESC",
@@ -412,7 +372,7 @@ describe("resolvers -> Query -> posts", () => {
     const postsByOrganization = await Post.find({
       organization: testOrganization?._id,
     })
-      .sort(sort)
+      .sort({ imageUrl: "desc" })
       .populate("organization")
       .populate("likedBy")
       .lean();
@@ -426,10 +386,6 @@ describe("resolvers -> Query -> posts", () => {
 
   it(`returns list of all existing posts having post.organization with _id === args.id
   sorted by ascending order of post.videoUrl if args.orderBy === 'videoUrl_ASC'`, async () => {
-    const sort = {
-      videoUrl: 1,
-    };
-
     const args: QueryPostsByOrganizationArgs = {
       id: testOrganization?.id,
       orderBy: "videoUrl_ASC",
@@ -448,7 +404,7 @@ describe("resolvers -> Query -> posts", () => {
     const postsByOrganization = await Post.find({
       organization: testOrganization?._id,
     })
-      .sort(sort)
+      .sort({ videoUrl: "asc" })
       .populate("organization")
       .populate("likedBy")
       .lean();
@@ -463,10 +419,6 @@ describe("resolvers -> Query -> posts", () => {
 
   it(`returns list of all existing posts having post.organization with _id === args.id
   sorted by descending order of post.videoUrl if args.orderBy === 'videoUrl_DESC'`, async () => {
-    const sort = {
-      videoUrl: -1,
-    };
-
     const args: QueryPostsByOrganizationArgs = {
       id: testOrganization?.id,
       orderBy: "videoUrl_DESC",
@@ -485,7 +437,7 @@ describe("resolvers -> Query -> posts", () => {
     const postsByOrganization = await Post.find({
       organization: testOrganization?._id,
     })
-      .sort(sort)
+      .sort({ videoUrl: "desc" })
       .populate("organization")
       .populate("likedBy")
       .lean();
@@ -499,10 +451,6 @@ describe("resolvers -> Query -> posts", () => {
 
   it(`returns list of all existing posts having post.organization with _id === args.id
   sorted by ascending order of post.likeCount if args.orderBy === 'likeCount_ASC'`, async () => {
-    const sort = {
-      likeCount: 1,
-    };
-
     const args: QueryPostsByOrganizationArgs = {
       id: testOrganization?.id,
       orderBy: "likeCount_ASC",
@@ -521,7 +469,7 @@ describe("resolvers -> Query -> posts", () => {
     const postsByOrganization = await Post.find({
       organization: testOrganization?._id,
     })
-      .sort(sort)
+      .sort({ likeCount: "asc" })
       .populate("organization")
       .populate("likedBy")
       .lean();
@@ -535,10 +483,6 @@ describe("resolvers -> Query -> posts", () => {
 
   it(`returns list of all existing posts having post.organization with _id === args.id
   sorted by descending order of post.likeCount if args.orderBy === 'likeCount_DESC'`, async () => {
-    const sort = {
-      likeCount: -1,
-    };
-
     const args: QueryPostsByOrganizationArgs = {
       id: testOrganization?.id,
       orderBy: "likeCount_DESC",
@@ -557,7 +501,7 @@ describe("resolvers -> Query -> posts", () => {
     const postsByOrganization = await Post.find({
       organization: testOrganization?._id,
     })
-      .sort(sort)
+      .sort({ likeCount: "desc" })
       .populate("organization")
       .populate("likedBy")
       .lean();
@@ -571,10 +515,6 @@ describe("resolvers -> Query -> posts", () => {
 
   it(`returns list of all existing posts having post.organization with _id === args.id
   sorted by ascending order of post.commentCount if args.orderBy === 'commentCount_ASC'`, async () => {
-    const sort = {
-      commentCount: 1,
-    };
-
     const args: QueryPostsByOrganizationArgs = {
       id: testOrganization?.id,
       orderBy: "commentCount_ASC",
@@ -592,7 +532,7 @@ describe("resolvers -> Query -> posts", () => {
     const postsByOrganization = await Post.find({
       organization: testOrganization?._id,
     })
-      .sort(sort)
+      .sort({ commentCount: "asc" })
       .populate("organization")
       .populate("likedBy")
       .lean();
@@ -606,10 +546,6 @@ describe("resolvers -> Query -> posts", () => {
 
   it(`returns list of all existing posts having post.organization with _id === args.id
   sorted by descending order of post.commentCount if args.orderBy === 'commentCount_DESC'`, async () => {
-    const sort = {
-      commentCount: -1,
-    };
-
     const args: QueryPostsByOrganizationArgs = {
       id: testOrganization?.id,
       orderBy: "commentCount_DESC",
@@ -628,7 +564,7 @@ describe("resolvers -> Query -> posts", () => {
     const postsByOrganization = await Post.find({
       organization: testOrganization?._id,
     })
-      .sort(sort)
+      .sort({ commentCount: "desc" })
       .populate("organization")
       .populate("likedBy")
       .lean();
@@ -653,10 +589,6 @@ describe("resolvers -> Query -> posts", () => {
       }
     );
 
-    const sort = {
-      commentCount: -1,
-    };
-
     const args: QueryPostsByOrganizationArgs = {
       id: testOrganization?.id,
       orderBy: "commentCount_DESC",
@@ -675,7 +607,7 @@ describe("resolvers -> Query -> posts", () => {
     const postsByOrganization = await Post.find({
       organization: testOrganization?._id,
     })
-      .sort(sort)
+      .sort({ commentCount: "desc" })
       .populate("organization")
       .populate("likedBy")
       .lean();

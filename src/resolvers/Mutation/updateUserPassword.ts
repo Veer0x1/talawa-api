@@ -59,7 +59,7 @@ export const updateUserPassword: MutationResolvers["updateUserPassword"] =
 
     const hashedPassword = await bcrypt.hash(args.data.newPassword, 12);
 
-    return await User.findOneAndUpdate(
+    const updatedUser = await User.findOneAndUpdate(
       {
         _id: context.userId,
       },
@@ -73,4 +73,13 @@ export const updateUserPassword: MutationResolvers["updateUserPassword"] =
         new: true,
       }
     ).lean();
+
+    if (updatedUser) return updatedUser;
+    else {
+      throw new errors.NotFoundError(
+        requestContext.translate(USER_NOT_FOUND_ERROR.MESSAGE),
+        USER_NOT_FOUND_ERROR.CODE,
+        USER_NOT_FOUND_ERROR.PARAM
+      );
+    }
   };

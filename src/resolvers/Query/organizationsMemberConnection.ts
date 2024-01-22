@@ -42,7 +42,7 @@ export const organizationsMemberConnection: QueryResolvers["organizationsMemberC
         pagination: false,
       };
     }
-
+    User;
     const usersModel = await User.paginate(
       {
         joinedOrganizations: {
@@ -73,8 +73,10 @@ export const organizationsMemberConnection: QueryResolvers["organizationsMemberC
       });
     } else {
       users = usersModel.docs.map((user) => {
+        const clonedUser = user.$clone();
+        console.log(clonedUser);
         return {
-          ...user._doc,
+          ...clonedUser,
           image: user.image ? `${context.apiRootUrl}${user.image}` : null,
           password: null,
         };

@@ -40,6 +40,8 @@ export const childTags: UserTagResolvers["childTags"] = async (
       };
   }
 
+  // get the sorting order for pagination
+
   const allChildTagObjects = await OrganizationTagUser.find({
     ...getFilterObject(args.input),
     parentTagId: parent._id,

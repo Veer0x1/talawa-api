@@ -47,7 +47,7 @@ export const updateUserType: MutationResolvers["updateUserType"] = async (
     _id: args.data.id!,
   });
 
-  if (userExists === false) {
+  if (userExists === null) {
     throw new errors.NotFoundError(
       requestContext.translate(USER_NOT_FOUND_ERROR.MESSAGE),
       USER_NOT_FOUND_ERROR.CODE,

@@ -35,7 +35,7 @@ export const sendMessageToGroupChat: MutationResolvers["sendMessageToGroupChat"]
       _id: context.userId,
     });
 
-    if (currentUserExists === false) {
+    if (currentUserExists === null) {
       throw new errors.NotFoundError(
         requestContext.translate(USER_NOT_FOUND_ERROR.MESSAGE),
         USER_NOT_FOUND_ERROR.CODE,

@@ -39,9 +39,9 @@ afterAll(async () => {
 describe("resolvers -> Query -> eventsByOrganization", () => {
   it(`returns list of all existing events sorted by ascending order of event._id
   if args.orderBy === 'id_ASC'`, async () => {
-    const sort = {
-      _id: 1,
-    };
+    // const sort = {
+    //   _id: 1,
+    // };
 
     const args: QueryEventsByOrganizationArgs = {
       id: testOrganization?._id,
@@ -60,9 +60,9 @@ describe("resolvers -> Query -> eventsByOrganization", () => {
       organization: testOrganization?._id,
       status: "ACTIVE",
     })
-      .sort(sort)
-      .populate("creator", "-password")
-      .populate("admins", "-password")
+      .sort({ _id: "asc" })
+      .populate({ path: "creator", select: "-password" })
+      .populate({ path: "admins", select: "-password" })
       .lean();
 
     expect(eventsByOrganizationPayload).toEqual(eventsByOrganizationInfo);

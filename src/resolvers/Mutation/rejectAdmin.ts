@@ -40,7 +40,7 @@ export const rejectAdmin: MutationResolvers["rejectAdmin"] = async (
   });
 
   // Checks whether user with _id === args.id exists.
-  if (userExists === false) {
+  if (userExists === null) {
     throw new errors.NotFoundError(
       requestContext.translate(USER_NOT_FOUND_ERROR.MESSAGE),
       USER_NOT_FOUND_ERROR.CODE,

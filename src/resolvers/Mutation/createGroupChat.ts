@@ -57,7 +57,7 @@ export const createGroupChat: MutationResolvers["createGroupChat"] = async (
     });
 
     // Checks whether user with _id === userId exists.
-    if (userExists === false) {
+    if (userExists === null) {
       throw new errors.NotFoundError(
         requestContext.translate(USER_NOT_FOUND_ERROR.MESSAGE),
         USER_NOT_FOUND_ERROR.CODE,

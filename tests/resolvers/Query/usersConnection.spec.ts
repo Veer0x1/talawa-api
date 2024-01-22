@@ -71,10 +71,6 @@ describe("resolvers -> Query -> usersConnection", () => {
       appLanguageCode: testUsers[1]?.appLanguageCode,
     };
 
-    const sort = {
-      _id: 1,
-    };
-
     const args: QueryUsersConnectionArgs = {
       first: 2,
       skip: 1,
@@ -97,7 +93,7 @@ describe("resolvers -> Query -> usersConnection", () => {
     const users = await User.find(where)
       .limit(2)
       .skip(1)
-      .sort(sort)
+      .sort({ _id: "asc" })
       .select(["-password"])
       .populate("createdOrganizations")
       .populate("createdEvents")
@@ -133,10 +129,6 @@ describe("resolvers -> Query -> usersConnection", () => {
       },
     };
 
-    const sort = {
-      _id: -1,
-    };
-
     const args: QueryUsersConnectionArgs = {
       first: 2,
       skip: 1,
@@ -159,7 +151,7 @@ describe("resolvers -> Query -> usersConnection", () => {
     const users = await User.find(where)
       .limit(2)
       .skip(1)
-      .sort(sort)
+      .sort({ _id: "desc" })
       .select(["-password"])
       .populate("createdOrganizations")
       .populate("createdEvents")
@@ -195,10 +187,6 @@ describe("resolvers -> Query -> usersConnection", () => {
       },
     };
 
-    const sort = {
-      firstName: 1,
-    };
-
     const args: QueryUsersConnectionArgs = {
       first: 2,
       skip: 1,
@@ -221,7 +209,7 @@ describe("resolvers -> Query -> usersConnection", () => {
     const users = await User.find(where)
       .limit(2)
       .skip(1)
-      .sort(sort)
+      .sort({ firstName: "asc" })
       .select(["-password"])
       .populate("createdOrganizations")
       .populate("createdEvents")
@@ -257,10 +245,6 @@ describe("resolvers -> Query -> usersConnection", () => {
       },
     };
 
-    const sort = {
-      firstName: -1,
-    };
-
     const args: QueryUsersConnectionArgs = {
       first: 2,
       skip: 1,
@@ -283,7 +267,7 @@ describe("resolvers -> Query -> usersConnection", () => {
     const users = await User.find(where)
       .limit(2)
       .skip(1)
-      .sort(sort)
+      .sort({ firstName: "desc" })
       .select(["-password"])
       .populate("createdOrganizations")
       .populate("createdEvents")
@@ -320,10 +304,6 @@ describe("resolvers -> Query -> usersConnection", () => {
       },
     };
 
-    const sort = {
-      lastName: 1,
-    };
-
     const args: QueryUsersConnectionArgs = {
       first: 2,
       skip: 1,
@@ -345,7 +325,7 @@ describe("resolvers -> Query -> usersConnection", () => {
     const users = await User.find(where)
       .limit(2)
       .skip(1)
-      .sort(sort)
+      .sort({ lastName: "asc" })
       .select(["-password"])
       .populate("createdOrganizations")
       .populate("createdEvents")
@@ -370,10 +350,6 @@ describe("resolvers -> Query -> usersConnection", () => {
       appLanguageCode: new RegExp("^" + testUsers[1]?.appLanguageCode),
     };
 
-    const sort = {
-      lastName: -1,
-    };
-
     const args: QueryUsersConnectionArgs = {
       first: 2,
       skip: 1,
@@ -395,7 +371,7 @@ describe("resolvers -> Query -> usersConnection", () => {
     const users = await User.find(where)
       .limit(2)
       .skip(1)
-      .sort(sort)
+      .sort({ lastName: "desc" })
       .select(["-password"])
       .populate("createdOrganizations")
       .populate("createdEvents")
@@ -411,10 +387,6 @@ describe("resolvers -> Query -> usersConnection", () => {
   it(`returns paginated list of users sorted by
   args.orderBy === 'appLanguageCode_ASC'`, async () => {
     const where = {};
-
-    const sort = {
-      appLanguageCode: 1,
-    };
 
     const args: QueryUsersConnectionArgs = {
       first: 2,
@@ -432,7 +404,7 @@ describe("resolvers -> Query -> usersConnection", () => {
     const users = await User.find(where)
       .limit(2)
       .skip(1)
-      .sort(sort)
+      .sort({ appLanguageCode: "asc" })
       .select(["-password"])
       .populate("createdOrganizations")
       .populate("createdEvents")
@@ -448,10 +420,6 @@ describe("resolvers -> Query -> usersConnection", () => {
   it(`returns paginated list of users sorted by
    args.orderBy === 'appLanguageCode_DESC'`, async () => {
     const where = {};
-
-    const sort = {
-      appLanguageCode: -1,
-    };
 
     const args: QueryUsersConnectionArgs = {
       first: 2,
@@ -469,7 +437,7 @@ describe("resolvers -> Query -> usersConnection", () => {
     const users = await User.find(where)
       .limit(2)
       .skip(1)
-      .sort(sort)
+      .sort({ appLanguageCode: "desc" })
       .select(["-password"])
       .populate("createdOrganizations")
       .populate("createdEvents")
@@ -485,10 +453,6 @@ describe("resolvers -> Query -> usersConnection", () => {
   it(`returns paginated list of users
   sorted by args.orderBy === 'email_ASC'`, async () => {
     const where = {};
-
-    const sort = {
-      email: 1,
-    };
 
     const args: QueryUsersConnectionArgs = {
       first: 2,
@@ -506,7 +470,7 @@ describe("resolvers -> Query -> usersConnection", () => {
     const users = await User.find(where)
       .limit(2)
       .skip(1)
-      .sort(sort)
+      .sort({ email: "asc" })
       .select(["-password"])
       .populate("createdOrganizations")
       .populate("createdEvents")
@@ -522,10 +486,6 @@ describe("resolvers -> Query -> usersConnection", () => {
   it(`returns paginated list of users
   sorted by args.orderBy === 'email_DESC'`, async () => {
     const where = {};
-
-    const sort = {
-      email: -1,
-    };
 
     const args: QueryUsersConnectionArgs = {
       first: 2,
@@ -543,7 +503,7 @@ describe("resolvers -> Query -> usersConnection", () => {
     const users = await User.find(where)
       .limit(2)
       .skip(1)
-      .sort(sort)
+      .sort({ email: "desc" })
       .select(["-password"])
       .populate("createdOrganizations")
       .populate("createdEvents")

@@ -3,7 +3,7 @@ import type {
   ConnectionError,
   CursorPaginationInput,
 } from "../types/generatedGraphQLTypes";
-import type { Types } from "mongoose";
+import type { SortOrder, Types } from "mongoose";
 
 interface InterfaceConnectionEdge<T> {
   cursor: string;
@@ -53,16 +53,17 @@ export const getLimit = (limit: number): number => {
 export const getSortingObject = (
   direction: "FORWARD" | "BACKWARD",
   sortingObject: Record<string, number>
-): Record<string, number> => {
+): { [key: string]: SortOrder | { $meta: any } } => {
   // We assume that the resolver would always be written with respect to the sorting that needs to be implemented for forward pagination
-  if (direction === "FORWARD") return sortingObject;
+  if (direction === "FORWARD")
+    return sortingObject as { [key: string]: SortOrder | { $meta: any } };
 
   // If we are paginating backwards, then we must reverse the order of all fields that are being sorted by.
   for (const [key, value] of Object.entries(sortingObject)) {
     sortingObject[key] = value * -1;
   }
 
-  return sortingObject;
+  return sortingObject as { [key: string]: SortOrder | { $meta: any } };
 };
 
 type FilterObjectType = {

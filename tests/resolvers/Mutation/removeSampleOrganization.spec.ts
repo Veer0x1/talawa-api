@@ -4,6 +4,7 @@ import { generateUserData } from "../../../src/utilities/createSampleOrganizatio
 import { expect, describe, it, vi, afterAll, beforeAll } from "vitest";
 import { removeSampleOrganization } from "../../../src/resolvers/Mutation/removeSampleOrganization";
 import type mongoose from "mongoose";
+import type { Types } from "mongoose";
 import { faker } from "@faker-js/faker";
 import { connect, disconnect } from "../../helpers/db";
 import {
@@ -11,9 +12,8 @@ import {
   USER_NOT_AUTHORIZED_ERROR,
   USER_NOT_FOUND_ERROR,
 } from "../../../src/constants";
-/* eslint-disable */
-const ORGANIZATION_ID = ((): InterfaceOrganization &
-  mongoose.Document<any, any, InterfaceOrganization> => {
+
+const ORGANIZATION_ID = ((): Types.ObjectId => {
   const _id = faker.database.mongodbObjectId();
   const creatorId = faker.database.mongodbObjectId();
   const organization = new Organization({

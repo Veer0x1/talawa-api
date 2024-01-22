@@ -18,7 +18,7 @@ let MONGOOSE_INSTANCE: typeof mongoose;
 let randomTestUser: TestUserType;
 let testUser: TestUserType;
 let testEvent: TestEventType;
-let eventAttendeeId: string;
+let eventAttendeeId: mongoose.Schema.Types.ObjectId;
 
 beforeAll(async () => {
   MONGOOSE_INSTANCE = await connect();
@@ -40,8 +40,8 @@ describe("resolvers -> Query -> hasSubmittedFeedback", () => {
 
     try {
       const args: QueryHasSubmittedFeedbackArgs = {
-        userId: Types.ObjectId().toString(),
-        eventId: Types.ObjectId().toString(),
+        userId: new Types.ObjectId().toString(),
+        eventId: new Types.ObjectId().toString(),
       };
 
       const context = {};
@@ -68,7 +68,7 @@ describe("resolvers -> Query -> hasSubmittedFeedback", () => {
     try {
       const args: QueryHasSubmittedFeedbackArgs = {
         userId: randomTestUser!._id,
-        eventId: Types.ObjectId().toString(),
+        eventId: new Types.ObjectId().toString(),
       };
 
       const context = {};

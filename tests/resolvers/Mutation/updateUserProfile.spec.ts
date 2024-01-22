@@ -99,7 +99,7 @@ describe("resolvers -> Mutation -> updateUserProfile", () => {
       };
 
       const context = {
-        userId: Types.ObjectId().toString(),
+        userId: new Types.ObjectId().toString(),
       };
 
       const { updateUserProfile: updateUserProfileResolver } = await import(
@@ -128,7 +128,7 @@ describe("resolvers -> Mutation -> updateUserProfile", () => {
       };
 
       const context = {
-        userId: Types.ObjectId().toString(),
+        userId: new Types.ObjectId().toString(),
       };
 
       const { updateUserProfile: updateUserProfileResolverUserError } =

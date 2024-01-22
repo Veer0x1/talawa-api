@@ -14,9 +14,8 @@ import type { TestUserType } from "../helpers/userAndOrg";
 import { createTestUserFunc } from "../helpers/user";
 
 let testUser: TestUserType;
-
 beforeAll(async () => {
-  connect();
+  await connect();
   testUser = await createTestUserFunc();
 });
 

@@ -18,7 +18,7 @@ let MONGOOSE_INSTANCE: typeof mongoose;
 let randomTestUser: TestUserType;
 let testUser: TestUserType;
 let testEvent: TestEventType;
-let eventAttendeeId: string;
+let eventAttendeeId: mongoose.Schema.Types.ObjectId;
 
 beforeAll(async () => {
   MONGOOSE_INSTANCE = await connect();
@@ -41,7 +41,7 @@ describe("resolvers -> Query -> addFeedback", () => {
     try {
       const args: MutationAddFeedbackArgs = {
         data: {
-          eventId: Types.ObjectId().toString(),
+          eventId: new Types.ObjectId().toString(),
           rating: 4,
           review: "Test Review",
         },

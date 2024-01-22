@@ -71,7 +71,7 @@ export const createAdmin: MutationResolvers["createAdmin"] = async (
   });
 
   // Checks whether user with _id === args.data.userId exists.
-  if (userExists === false) {
+  if (userExists === null) {
     throw new errors.NotFoundError(
       requestContext.translate(USER_NOT_FOUND_ERROR.MESSAGE),
       USER_NOT_FOUND_ERROR.CODE,
@@ -80,7 +80,7 @@ export const createAdmin: MutationResolvers["createAdmin"] = async (
   }
 
   const userIsOrganizationMember = organization.members.some((member) =>
-    Types.ObjectId(member).equals(args.data.userId)
+    new Types.ObjectId(member).equals(args.data.userId)
   );
 
   // Checks whether user with _id === args.data.userId is not a member of organization.
@@ -93,7 +93,7 @@ export const createAdmin: MutationResolvers["createAdmin"] = async (
   }
 
   const userIsOrganizationAdmin = organization.admins.some((admin) =>
-    Types.ObjectId(admin).equals(args.data.userId)
+    new Types.ObjectId(admin).equals(args.data.userId)
   );
 
   // Checks whether user with _id === args.data.userId is already an admin of organization.
@@ -128,7 +128,7 @@ export const createAdmin: MutationResolvers["createAdmin"] = async (
   Adds organization._id to adminFor list on user's document with _id === args.data.userId
   and returns the updated user.
   */
-  return await User.findOneAndUpdate(
+  const updatedUser = await User.findOneAndUpdate(
     {
       _id: args.data.userId,
     },
@@ -143,4 +143,13 @@ export const createAdmin: MutationResolvers["createAdmin"] = async (
   )
     .select(["-password"])
     .lean();
+
+  if (updatedUser) return updatedUser;
+  else {
+    throw new errors.NotFoundError(
+      requestContext.translate(USER_NOT_FOUND_ERROR.MESSAGE),
+      USER_NOT_FOUND_ERROR.CODE,
+      USER_NOT_FOUND_ERROR.PARAM
+    );
+  }
 };

@@ -14,7 +14,7 @@ export const updateLanguage: MutationResolvers["updateLanguage"] = async (
   args,
   context
 ) => {
-  return await User.findOneAndUpdate(
+  const updatedUser = await User.findOneAndUpdate(
     {
       _id: context.userId,
     },
@@ -27,4 +27,9 @@ export const updateLanguage: MutationResolvers["updateLanguage"] = async (
       new: true,
     }
   ).lean();
+
+  if (!updatedUser) {
+    throw new Error("User not found");
+  }
+  return updatedUser;
 };

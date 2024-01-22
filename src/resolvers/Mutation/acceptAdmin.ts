@@ -35,7 +35,7 @@ export const acceptAdmin: MutationResolvers["acceptAdmin"] = async (
     _id: args.id,
   });
 
-  if (userExists === false) {
+  if (userExists === null) {
     throw new errors.NotFoundError(
       requestContext.translate(USER_NOT_FOUND_ERROR.MESSAGE),
       USER_NOT_FOUND_ERROR.CODE,

@@ -132,7 +132,7 @@ describe("resolvers => Mutation => removeOrganizationCustomField", () => {
       .spyOn(requestContext, "translate")
       .mockImplementationOnce((message) => `Translated ${message}`);
 
-    const nonExistentCustomFieldId = Types.ObjectId().toString();
+    const nonExistentCustomFieldId = new Types.ObjectId().toString();
 
     const context = { userId: testUser?._id };
     const args = {
@@ -173,7 +173,7 @@ describe("resolvers => Mutation => removeOrganizationCustomField", () => {
       testOrganization?._id.toString()
     );
 
-    const context = { userId: Types.ObjectId().toString() };
+    const context = { userId: new Types.ObjectId().toString() };
     const args = {
       organizationId: testOrganization?._id as string,
       customFieldId: customField?._id.toString() as string,
@@ -209,7 +209,7 @@ describe("resolvers => Mutation => removeOrganizationCustomField", () => {
 
     const context = { userId: testUser?._id };
     const args = {
-      organizationId: Types.ObjectId().toString() as string,
+      organizationId: new Types.ObjectId().toString() as string,
       customFieldId: customField?._id.toString() as string,
     };
 

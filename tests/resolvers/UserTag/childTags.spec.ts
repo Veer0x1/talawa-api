@@ -54,7 +54,7 @@ describe("resolvers -> Tag -> childTags", () => {
       input: {
         limit: MAXIMUM_FETCH_LIMIT,
         direction: "FORWARD",
-        cursor: Types.ObjectId().toString(),
+        cursor: new Types.ObjectId().toString(),
       },
     };
 

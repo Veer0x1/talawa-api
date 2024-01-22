@@ -158,6 +158,7 @@ const eventSchema = new Schema(
   },
   {
     timestamps: true,
+    strictPopulate: false,
   }
 );
 

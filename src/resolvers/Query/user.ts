@@ -14,7 +14,7 @@ export const user: QueryResolvers["user"] = async (_parent, args, context) => {
     _id: context.userId,
   });
 
-  if (currentUserExists === false) {
+  if (currentUserExists === null) {
     throw new errors.NotFoundError(
       USER_NOT_FOUND_ERROR.DESC,
       USER_NOT_FOUND_ERROR.CODE,

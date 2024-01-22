@@ -6,13 +6,7 @@ let session!: mongoose.ClientSession;
 
 export const connect = async (): Promise<void> => {
   try {
-    await mongoose.connect(MONGO_DB_URL as string, {
-      useCreateIndex: true,
-      useUnifiedTopology: true,
-      useFindAndModify: false,
-      useNewUrlParser: true,
-    });
-    session = await mongoose.startSession();
+    await mongoose.connect(MONGO_DB_URL as string);
   } catch (error: unknown) {
     if (error instanceof Error) {
       const errorMessage = error.toString();

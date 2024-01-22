@@ -26,6 +26,24 @@ const testErrors = [
     param: "fileType",
   },
 ];
+import i18n from "i18n";
+i18n.configure({
+  directory: `${__dirname}/../locales`,
+  staticCatalog: {
+    en: require("../../locales/en.json"),
+    hi: require("../../locales/hi.json"),
+    zh: require("../../locales/zh.json"),
+    sp: require("../../locales/sp.json"),
+    fr: require("../../locales/fr.json"),
+  },
+  queryParameter: "lang",
+  defaultLocale: "en",
+  locales: ["en", "hi", "zh", "sp", "fr"],
+  autoReload: true,
+  updateFiles: true,
+  syncFiles: true,
+});
+i18n.init;
 
 let MONGOOSE_INSTANCE: typeof mongoose;
 
@@ -96,6 +114,7 @@ describe("utilities -> reuploadDuplicateCheck", () => {
 
       await reuploadDuplicateCheck(testOldImagePath, testNewImagePath);
     } catch (error) {
+      console.log(error);
       expect(error).not.toBe(null);
     }
   });

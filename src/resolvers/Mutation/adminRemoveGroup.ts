@@ -70,7 +70,7 @@ export const adminRemoveGroup: MutationResolvers["adminRemoveGroup"] = async (
   });
 
   // Checks currentUser with _id === context.userId exists.
-  if (currentUserExists === false) {
+  if (currentUserExists === null) {
     throw new errors.NotFoundError(
       requestContext.translate(USER_NOT_FOUND_ERROR.MESSAGE),
       USER_NOT_FOUND_ERROR.CODE,

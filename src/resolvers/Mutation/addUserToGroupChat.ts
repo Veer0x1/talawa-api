@@ -71,7 +71,7 @@ export const addUserToGroupChat: MutationResolvers["addUserToGroupChat"] =
     });
 
     // Checks whether user with _id === args.userId exists.
-    if (userExists === false) {
+    if (userExists === null) {
       throw new errors.NotFoundError(
         requestContext.translate(USER_NOT_FOUND_ERROR.MESSAGE),
         USER_NOT_FOUND_ERROR.CODE,
@@ -93,7 +93,7 @@ export const addUserToGroupChat: MutationResolvers["addUserToGroupChat"] =
     }
 
     // Adds args.userId to users list on groupChat's document and returns the updated groupChat.
-    return await GroupChat.findOneAndUpdate(
+    const groupChatResult = await GroupChat.findOneAndUpdate(
       {
         _id: args.chatId,
       },
@@ -106,4 +106,13 @@ export const addUserToGroupChat: MutationResolvers["addUserToGroupChat"] =
         new: true,
       }
     ).lean();
+
+    if (groupChatResult) return groupChatResult;
+    else {
+      throw new errors.NotFoundError(
+        requestContext.translate(CHAT_NOT_FOUND_ERROR.MESSAGE),
+        CHAT_NOT_FOUND_ERROR.CODE,
+        CHAT_NOT_FOUND_ERROR.PARAM
+      );
+    }
   };
