@@ -92,7 +92,7 @@ export const createMember: MutationResolvers["createMember"] = async (
   }
 
   // add organization's id from joinedOrganizations list on user.
-  await User.updateOne(
+  await User.findByIdAndUpdate(
     {
       _id: args.input.userId,
     },

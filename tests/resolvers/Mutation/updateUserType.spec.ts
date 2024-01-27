@@ -109,7 +109,7 @@ describe("resolvers -> Mutation -> updateUserType", () => {
       .mockImplementation((message) => `Translated ${message}`);
 
     try {
-      await User.updateOne(
+      await User.findByIdAndUpdate(
         {
           _id: testUsers[0]?._id,
         },
@@ -179,7 +179,7 @@ describe("resolvers -> Mutation -> updateUserType", () => {
       (message) => `Translated ${message}`
     );
 
-    await User.updateOne(
+    await User.findByIdAndUpdate(
       {
         _id: testUsers[0]?._id,
       },

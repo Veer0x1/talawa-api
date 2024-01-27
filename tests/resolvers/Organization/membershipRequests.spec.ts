@@ -25,7 +25,7 @@ beforeAll(async () => {
     organization: testOrganization?._id,
   });
 
-  await User.updateOne(
+  await User.findByIdAndUpdate(
     {
       _id: testUser?._id,
     },
