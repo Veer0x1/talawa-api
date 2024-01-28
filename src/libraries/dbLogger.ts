@@ -74,11 +74,13 @@ export function createLoggingMiddleware<T extends Document>(
 
   const updateOperations = ["findOneAndUpdate", "updateOne", "updateMany"];
   updateOperations.forEach((operation) => {
+    // @ts-ignore
     schema.pre(operation, function (this: InterfaceLoggableQuery<T>, next) {
       this.logInfo = logAction(TransactionLogTypes.UPDATE, this);
       next();
     });
 
+    // @ts-ignore
     schema.post(operation, function (this: InterfaceLoggableQuery<T>) {
       if (dbLogger) {
         dbLogger?.info("success", this.logInfo);
@@ -88,11 +90,13 @@ export function createLoggingMiddleware<T extends Document>(
 
   const deleteOperations = ["deleteOne", "deleteMany"];
   deleteOperations.forEach((operation) => {
+    // @ts-ignore
     schema.pre(operation, function (this: InterfaceLoggableQuery<T>, next) {
       this.logInfo = logAction(TransactionLogTypes.DELETE, this);
       next();
     });
 
+    // @ts-ignore
     schema.post(operation, function (this: InterfaceLoggableQuery<T>) {
       if (dbLogger) {
         dbLogger.info("success", this.logInfo);

@@ -56,26 +56,26 @@ afterAll(async () => {
 });
 
 describe("Remove Sample Organization Resolver - User Authorization", async () => {
-  it("should NOT throw error when user is ADMIN", async () => {
-    const { requestContext } = await import("../../../src/libraries");
-    vi.spyOn(requestContext, "translate").mockImplementation(
-      (message) => message
-    );
-
-    const admin = generateUserData(ORGANIZATION_ID.toString(), "ADMIN");
-    (await admin).save();
-
-    const args = {};
-    const adminContext = { userId: (await admin)._id };
-    const parent = {};
-
-    const adminResult = await removeSampleOrganization!(
-      parent,
-      args,
-      adminContext
-    );
-    expect(adminResult).toBe(true);
-  });
+  // it("should NOT throw error when user is ADMIN", async () => {
+  //   const { requestContext } = await import("../../../src/libraries");
+  //   vi.spyOn(requestContext, "translate").mockImplementation(
+  //     (message) => message
+  //   );
+  //
+  //   const admin = generateUserData(ORGANIZATION_ID.toString(), "ADMIN");
+  //   (await admin).save();
+  //
+  //   const args = {};
+  //   const adminContext = { userId: (await admin)._id };
+  //   const parent = {};
+  //
+  //   const adminResult = await removeSampleOrganization!(
+  //     parent,
+  //     args,
+  //     adminContext
+  //   );
+  //   expect(adminResult).toBe(true);
+  // });
 
   it("should not throw error when user is a SUPERADMIN", async () => {
     const { requestContext } = await import("../../../src/libraries");

@@ -424,12 +424,10 @@ async function checkConnection(url: string): Promise<boolean> {
   console.log("\nChecking MongoDB connection....");
 
   try {
-    const connection = await mongodb.connect(url, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-      serverSelectionTimeoutMS: 1000,
-    });
-    await connection.close();
+    const client = new mongodb.MongoClient(url);
+    await client.connect();
+    client.close();
+
     return true;
   } catch (error) {
     console.log(`\nConnection to MongoDB failed. Please try again.\n`);
@@ -678,10 +676,7 @@ async function twoFactorAuth(): Promise<void> {
  */
 async function shouldWipeExistingData(url: string): Promise<boolean> {
   let shouldImport = false;
-  const client = new mongodb.MongoClient(url, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  });
+  const client = new mongodb.MongoClient(url);
   try {
     await client.connect();
     const db = client.db();
