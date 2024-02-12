@@ -9,6 +9,7 @@ import type { MutationResolvers } from "../../types/generatedGraphQLTypes";
 import { errors, requestContext } from "../../libraries";
 import { User } from "../../models";
 import { UserFamily } from "../../models/userFamily";
+import type { InterfaceUserFamily } from "../../models/userFamily";
 import { adminCheck } from "../../utilities/userFamilyAdminCheck";
 import { Types } from "mongoose";
 /**
@@ -46,11 +47,11 @@ export const removeUserFromUserFamily: MutationResolvers["removeUserFromUserFami
     }
 
     const userIsMemberOfUserFamily = userFamily?.users.some((member) => {
-      return Types.ObjectId(member).equals(user?._id);
+      return new Types.ObjectId(member).equals(user?._id);
     });
 
     const userIdUserFamilyAdmin = userFamily?.admins.some((admin) => {
-      Types.ObjectId(admin).equals(user?._id);
+      new Types.ObjectId(admin).equals(user?._id);
     });
 
     //Check whether user family exists.
@@ -63,7 +64,7 @@ export const removeUserFromUserFamily: MutationResolvers["removeUserFromUserFami
     }
 
     //check whether user is admin of the family.
-    await adminCheck(currentUser?._id, userFamily);
+    await adminCheck(currentUser?._id!, userFamily);
 
     //Check whether user is member of the family.
     if (!userIsMemberOfUserFamily) {
@@ -102,7 +103,7 @@ export const removeUserFromUserFamily: MutationResolvers["removeUserFromUserFami
           of userFamily. If match is true assigns error message to errors list
           and breaks out of loop.
         */
-    if (Types.ObjectId(userFamily.creator.toString()).equals(user._id)) {
+    if (new Types.ObjectId(userFamily.creator.toString()).equals(user._id)) {
       throw new errors.UnauthorizedError(
         requestContext.translate(ADMIN_REMOVING_CREATOR.MESSAGE),
         ADMIN_REMOVING_CREATOR.CODE,
@@ -111,7 +112,7 @@ export const removeUserFromUserFamily: MutationResolvers["removeUserFromUserFami
     }
 
     //Removes args.userId from users list of user family ans return the updated family.
-    return await UserFamily.findOneAndUpdate(
+    const updatedFamily = await UserFamily.findOneAndUpdate(
       {
         _id: args.familyId,
       },
@@ -126,4 +127,5 @@ export const removeUserFromUserFamily: MutationResolvers["removeUserFromUserFami
         new: true,
       }
     ).lean();
+    return updatedFamily as InterfaceUserFamily;
   };
